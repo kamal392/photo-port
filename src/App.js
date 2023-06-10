@@ -1,42 +1,39 @@
-import React ,{useState}from "react";
-import About from "./components/About";
+import React, { useState } from "react";
 import Nav from "./components/Nav";
+import About from "./components/About";
 import Gallery from "./components/Gallery";
+
 function App() {
+
+  // we lift up the categories state from a Nav component to App so that we can pass it to its children component.
   const [categories] = useState([
     {
       name: "commercial",
       description:
         "Photos of grocery stores, food trucks, and other commercial projects",
     },
-    {
-      name: "portraits",
-      description: "Portraits of people in my life",
-    },
-    {
-      name: "food",
-      description: "Delicious delicacies",
-    },
+    { name: "portraits", description: "Portraits of people in my life" },
+    { name: "food", description: "Delicious delicacies" },
     {
       name: "landscape",
-      description: "Fields, farmhouses, waterfall , and the beauty of nature",
+      description: "Fields, farmhouses, waterfalls, and the beauty of nature",
     },
   ]);
-
-  // Here currentCategory holds current value of the state and setCurrentCategory function update the state
-
+  
   const [currentCategory, setCurrentCategory] = useState(categories[0]);
- 
 
   return (
     <div>
-      <Nav>
+
+      <Nav
+      // here we have setup the attribute value so that we can pass it to Nav through props.
         categories={categories}
         setCurrentCategory={setCurrentCategory}
         currentCategory={currentCategory}
-      </Nav>
+      ></Nav>
       <main>
-        <Gallery></Gallery>
+        
+        <Gallery currentCategory={currentCategory}></Gallery>
         <About></About>
       </main>
     </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import { capitalizeFirstLetter } from "../../utils/helpers";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 function Nav(props) {
   // we moved state to the app component so that we can pass it to the other component like Nav and Gallery
   // here we pass data from App.js to Nav component using props
@@ -9,18 +9,17 @@ function Nav(props) {
 
   //  UseEffect  to update the tab on the browser to reflect the user's category selection.
   //  This will improve the user experience by providing the user with feedback from the website.
-  useEffect(() => {
-    document.title = capitalizeFirstLetter(currentCategory.name);
-  }, [currentCategory]);
+  // useEffect(() => {
+  //   document.title = capitalizeFirstLetter(currentCategory.name);
+  // }, [currentCategory]);
 
   return (
     <header className="flex-row px-1">
       <h2>
         <a data-testid="link" href="/">
           <span role="img" aria-label="camera">
-            {" "}
             📸
-          </span>{" "}
+          </span>
           Oh Snap!
         </a>
       </h2>
@@ -35,10 +34,10 @@ function Nav(props) {
           <li>
             <span>Contact </span>
           </li>
-          {/* here we are going to map through categories with the help of map function */}
-          {categories.map((category) => {
+
+          {categories.map((category) => (
             <li
-              className={`mx-1${
+              className={`mx-1 ${
                 currentCategory.name === category.name && "navActive"
               }`}
               key={category.name}
@@ -50,8 +49,8 @@ function Nav(props) {
               >
                 {capitalizeFirstLetter(category.name)}
               </span>
-            </li>;
-          })}
+            </li>
+          ))}
         </ul>
       </nav>
     </header>

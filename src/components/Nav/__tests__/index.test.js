@@ -4,7 +4,14 @@ import { render, cleanup } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import Nav from "..";
 
-// cleanup remove component from browser
+// In order to handle props for the Nav , we need to add the categories array as well.
+const categories =[
+  {name:'portrait',description:'Portraits of people in my life'}]
+
+const mockCurrentCategory = jest.fn();
+const mockSetCurrentCategory = jest.fn();
+
+  // cleanup remove component from browser
 afterEach(cleanup);
 
 // describe function takes 2 arguments first the name of the component needs to be tested
@@ -13,15 +20,22 @@ afterEach(cleanup);
 describe("Nav component", () => {
   // baseline test
   it("render", () => {
-    render(<Nav />);
+    render(<Nav
+      categories={categories}
+      setCurrentCategory ={mockSetCurrentCategory}
+      currentCategory = {mockCurrentCategory} />);
   });
 
   // snapshot test
   it("match snapshot", () => {
-    const { asFragment } = render(<Nav />);
+    const { asFragment } = render(<Nav
+      categories={categories}
+      setCurrentCategory={mockSetCurrentCategory}
+      currentCategory ={mockCurrentCategory} />);
     // assert value comparison
 
     expect(asFragment()).toMatchSnapshot();
+   
   });
 });
 
