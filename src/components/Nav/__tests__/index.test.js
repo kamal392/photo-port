@@ -1,15 +1,18 @@
 // importing react for proper rendering of Nav Component
 import React from "react";
 import { render, cleanup } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
+import '@testing-library/jest-dom/extend-expect';
 import Nav from "..";
 
 // In order to handle props for the Nav , we need to add the categories array as well.
 const categories =[
   {name:'portrait',description:'Portraits of people in my life'}]
 
+  // declaring props for the testing purpose.
 const mockCurrentCategory = jest.fn();
 const mockSetCurrentCategory = jest.fn();
+const mockContactSelected =jest.fn();
+const mockSetContactSelected =jest.fn();
 
   // cleanup remove component from browser
 afterEach(cleanup);
@@ -20,10 +23,15 @@ afterEach(cleanup);
 describe("Nav component", () => {
   // baseline test
   it("render", () => {
-    render(<Nav
-      categories={categories}
-      setCurrentCategory ={mockSetCurrentCategory}
-      currentCategory = {mockCurrentCategory} />);
+    render(
+      <Nav
+        categories={categories}
+        setCurrentCategory={mockSetCurrentCategory}
+        currentCategory={mockCurrentCategory}
+        contactSelected={mockContactSelected}
+        setContactSelected={mockSetContactSelected}
+      />
+    );
   });
 
   // snapshot test
@@ -31,7 +39,9 @@ describe("Nav component", () => {
     const { asFragment } = render(<Nav
       categories={categories}
       setCurrentCategory={mockSetCurrentCategory}
-      currentCategory ={mockCurrentCategory} />);
+      currentCategory ={mockCurrentCategory}
+      contactSelected ={mockContactSelected}
+      setContactSelected ={mockSetContactSelected} />);
     // assert value comparison
 
     expect(asFragment()).toMatchSnapshot();
