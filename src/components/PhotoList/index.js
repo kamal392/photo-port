@@ -127,7 +127,10 @@ const PhotoList = ({ category }) => {
   const toggleModal = (image, i) => {
     //  current photo
     SetCurrentPhoto({ ...image, index: i });
-    SetIsModalOpen(true);
+
+    // SetIsModalOpen(true); changed to SetIsModalOpen(!isModalOpen);
+    // !isModalOpen is true coz its initial value is false 
+    SetIsModalOpen(!isModalOpen);
   };
   const currentPhotos = photos.filter((photo) => photo.category === category);
 
@@ -135,8 +138,9 @@ const PhotoList = ({ category }) => {
   return (
     <div>
       {/* Modal will render only when the user will click and its default value which is false now will be true on a user click. */}
-      {isModalOpen && <Modal currentPhoto={currentPhoto} />}
+      {isModalOpen && <Modal currentPhoto={currentPhoto} onClose ={toggleModal} />}
       <div className="flex-row">
+        {/*The image object represents the element in the photos array, and the i will render the image */}
         {currentPhotos.map((image, i) => (
           <img
             src={require(`../../assets/small/${category}/${i}.jpg`)}
